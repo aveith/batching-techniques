@@ -1,0 +1,77 @@
+https://www.digitalocean.com/community/questions/how-to-setup-a-mosquitto-mqtt-server-and-receive-data-from-owntracks
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-the-mosquitto-mqtt-messaging-broker-on-ubuntu-16-04
+
+
+
+https://edgent.apache.org/docs/edgent-getting-started
+
+
+
+#kafka
+./kafka_2.10-0.10.2.0/bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic test
+
+./kafka_2.10-0.10.2.0/bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic sink-kafka
+
+
+
+./kafka_2.10-0.10.2.0/bin/zookeeper-server-start.sh ./kafka_2.10-0.10.1.1/config/zookeeper.properties
+./kafka_2.10-0.10.2.0/bin/kafka-server-start.sh ./kafka_2.10-0.10.1.1/config/server.properties
+
+./kafka_2.10-0.10.2.0/bin/kafka-console-consumer.sh --bootstrap-server 172.16.1.18:9092 --topic test --from-beginning
+./kafka_2.10-0.10.2.0/bin/kafka-console-producer.sh --broker-list 172.16.1.18:9092 --topic test
+
+
+
+$KAFKA_HOME/bin/zookeeper-server-start.sh -daemon config/zookeeper.properties
+$KAFKA_HOME/bin/kafka-server-start.sh -daemon config/server.properties
+
+#mqtt
+mosquitto -c /etc/mosquitto/mosquitto.conf
+sudo mosquitto_sub -h 140.77.13.109 -p 8883 -v -t 'mqtt/#' -u mqtt -P mqtt
+sudo mosquitto_pub -h 140.77.13.109 -p 8883 -t mqtt -u mqtt -P mqtt -f ~/twitter.json
+
+
+
+
+sudo tc qdisc add dev eth0 root netem delay 100ms
+sudo tc qdisc del dev eth0 root netem
+
+sudo vi /etc/network/interfaces
+
+sudo wondershaper {interface} {down} {up}
+sudo wondershaper clear eth1
+
+sed -i 's/original/new/g' file.txt
+
+
+
+
+Execute mode
+cd scripts
+sh bin/bandwidth_test ubuntu@albacore-3 ubuntu@albacore-2 ubuntu@albacore-1 350 ubuntu@albacore-4 >> out.log
+
+
+
+sudo iptraf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+albacore-1
+sudo route del default
+sudo route add default gw 10.0.1.1
